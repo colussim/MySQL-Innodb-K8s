@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-script
+data:
+  init.sql: |
+    CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}'; 
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dbc1
+  labels:
+    app: mysql
+spec:
+  replicas: 3  # Number of MySQL instances to deploy
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql     
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      imagePullSecrets:
+      - name: oracle-registry-secret 
+      containers:
+      - name: mysql
+        image: container-registry.oracle.com/mysql/enterprise-server:9.0.1-aarch64
+        ports:
+        - name: mysql
+          containerPort: 3306
+        - name: mysqlx
+          containerPort: 33060
+        - name: xcom
+          containerPort: 33061
+        command:
+        - /bin/bash
+        args:
+        - -c
+         - |
+          cp /docker-entrypoint-initdb.d/init.sql /tmp/init.sql && \
+          sed -i "s|\${MYSQL_ROOT_PASSWORD}|$(echo "$MYSQL_ROOT_PASSWORD" | sed 's/[\/&]/\\&/g')|g" /tmp/init.sql && \
+          /entrypoint.sh --init-file=/tmp/init.sql \
+          --server-id=$((20 + $(echo $HOSTNAME | grep -o '[^-]*$') + 1)) \
+          --report-host=${HOSTNAME}.mysql.${POD_NAMESPACE}.svc.cluster.local \
+          --binlog-checksum=NONE \
+          --enforce-gtid-consistency=ON \
+          --gtid-mode=ON
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace  
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        - name: mysql-init-script
+          mountPath: /docker-entrypoint-initdb.d/  
+      volumes:
+      - name: mysql-init-script
+        configMap:
+          name: mysql-init-script    
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate        
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-persistent-storage
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 5Gi  # PVC size

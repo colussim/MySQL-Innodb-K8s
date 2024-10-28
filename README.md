@@ -17,8 +17,9 @@ This includes the deployment of MySQL Router as well as an application that uses
 ## Prerequisites
 Before you get started, you’ll need to have these things:
 - An operational Kubernetes cluster.
--  Installed kubectl command-line tool.
--  A Oracle container registry account.
+- Installed kubectl command-line tool.
+- A Oracle container registry account.
+- bash version 4+
 
 
 ## Steps
@@ -281,7 +282,7 @@ instance 3 : dbc1-2.mysql.mysqldb.svc.cluster.local
 
 ```bash
 bash-5.1#mysqlsh --uri root@dbc1-0.mysql.mysqldb.svc.cluster.local -p --js
-Cannot set LC_ALL to locale en_US.UTF-8: No such file or directory
+
 Please provide the password for 'root@dbc1-0.mysql.mysqldb.svc.cluster.local': ********
 Save password for 'root@dbc1-0.mysql.mysqldb.svc.cluster.local'? [Y]es/[N]o/Ne[v]er (default No): Y
 MySQL Shell 9.0.1-commercial
@@ -379,7 +380,7 @@ Start with the dbc1-0 instance, which will be the primary instance for the clust
 
 ```bash
 mysqlsh --uri clusteradmin@dbc1-0.mysql.mysqldb.svc.cluster.local -p --js
-Cannot set LC_ALL to locale en_US.UTF-8: No such file or directory
+
 Please provide the password for 'clusteradmin@dbc1-0.mysql.mysqldb.svc.cluster.local': ********
 Save password for 'clusteradmin@dbc1-0.mysql.mysqldb.svc.cluster.local'? [Y]es/[N]o/Ne[v]er (default No): Y
 MySQL Shell 9.0.1-commercial
@@ -630,7 +631,7 @@ We will create a ConfigMap for the other variables(MYSQL_HOST,MYSQL_DATABASE,MYS
 **ConfigMAp creation**:
 ```bash
 
-:> kubectl -n ecommer cecreate configmap app-config \
+:> kubectl -n ecommerce cecreate configmap app-config \
   --from-literal=MYSQL_HOST=10.89.0.100 \
   --from-literal=MYSQL_DATABASE=mydb \
   --from-literal=MYSQL_USER=app \
@@ -707,7 +708,7 @@ spec:
 To deploy the application, run this command : 
 ```bash
 
-:> kubectl -n ecommerce apply -f apps/ecommerce.yaml
+:> kubectl -n ecommerce apply -f ecommerce.yaml
 deployment.apps/ecommerce created
 service/ecommerce-service created
 :>
@@ -744,6 +745,7 @@ http://10.89.0.103:5001
 
 The next step involves testing our application’s behavior during a failover of our MySQL InnoDB cluster,a topic we will address in a future article.
 
+You will find all scripts and manifests in the scripts directory of the repository.
 
 ## Conclusion
 In conclusion, we have outlined the essential steps for deploying a MySQL InnoDB cluster in Kubernetes using the Kubernetes manifest method, and we have also demonstrated how to deploy an application that utilizes MySQL. This approach allows you to harness the power and flexibility of MySQL, ensuring a resilient and scalable database solution for your applications. As we continue to explore various deployment strategies in future articles, including the MySQL operator and tools such as ArgoCD, we aim to provide a comprehensive understanding of how to optimize MySQL for diverse environments. Thank you for following along, and we look forward to diving deeper into these topics in upcoming discussions.

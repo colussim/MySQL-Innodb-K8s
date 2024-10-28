@@ -1,0 +1,9 @@
+{
+    "auths":{
+          "container-registry.oracle.com": {   
+        "username":"USERNAME",
+        "password":"XXXXXXXX",
+        "email":"EMAIL"
+         }
+        }
+}
