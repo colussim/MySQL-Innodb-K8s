@@ -1,3 +1,5 @@
+ ![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+
 ## Deployment of MySQL InnoDB Cluster in Kubernetes
 
 As cloud-native applications continue to dominate the tech landscape, deploying databases within Kubernetes has become increasingly prevalent. MySQL, particularly with its InnoDB storage engine, stands out as a reliable choice for managing data in Kubernetes environments. The benefits of using MySQL in Kubernetes are numerous:
