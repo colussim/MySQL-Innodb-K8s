@@ -40,7 +40,8 @@ namespace/mysqldb created
 secret/mysql-secret created
 :>
 ```
-> Replace the value of MYSQL_PASSWORD with your password
+❗️ Replace the value of MYSQL_PASSWORD with your root user’s password
+
 
 The password is deployed with each Pod, and is used by management scripts and commands for MySQL InnoDB Cluster and ClusterSet deployment in this tutorial.
 
