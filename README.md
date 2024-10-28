@@ -1,10 +1,5 @@
 ## Deployment of MySQL InnoDB Cluster in Kubernetes
 
-
-![mysql-innodb-k8s.drawio.png](imgs/mysql-innodb-k8s.drawio.png)
-
-
-
 As cloud-native applications continue to dominate the tech landscape, deploying databases within Kubernetes has become increasingly prevalent. MySQL, particularly with its InnoDB storage engine, stands out as a reliable choice for managing data in Kubernetes environments. The benefits of using MySQL in Kubernetes are numerous:
 
 - **Scalability:** MySQL in Kubernetes allows you to easily scale your database instances up or down to meet changing application demands, ensuring optimal resource utilization.
@@ -13,7 +8,20 @@ As cloud-native applications continue to dominate the tech landscape, deploying 
 - **Consistent Development Environments:** By deploying MySQL on Kubernetes, development and production environments can remain consistent, easing the process of debugging and testing applications.
 - **Microservices Compatibility:** MySQL fits well within microservices architectures, enabling applications to have their own dedicated databases while still facilitating efficient inter-service communication.
 
+![mysql-innodb-k8s.drawio.png](imgs/mysql-innodb-k8s.drawio.png)
+
 In this article, we will walk through the steps required to deploy a MySQL InnoDB cluster in Kubernetes using the Kubernetes manifest method, leveraging the advantages of MySQL to create a robust, scalable database solution that meets the demands of modern applications. Future articles will explore additional deployment methods, including the MySQL operator and tools like ArgoCD.
+This includes the deployment of MySQL Router as well as an application that uses the MySQL InnoDB cluster.
+
+
+## Prerequisites
+Before you get started, you’ll need to have these things:
+- An operational Kubernetes cluster.
+-  Installed kubectl command-line tool.
+-  A Oracle container registry account.
+
+
+## Steps
 
 ✅ **Step1:** Create a namespace
 
@@ -25,22 +33,14 @@ namespace/mysqldb created
 
 ✅ **Step2:** Create the MySQL secret:
 
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-secret
-type: Opaque
-data:
-  password: LW4gQmVuY2gxMjMK 
-  admin-password: LW4gQmVuY2gxMjMK 
-```
-
 ```bash
-:> kubectl apply -n mysql1 -f secret.yaml
+
+:> kubectl -n mysql1 create secret generic mysql-secret \
+  --from-literal=MYSQL_PASSWORD=YourMySQLUserPassword
 secret/mysql-secret created
 :>
 ```
+> Replace the value of MYSQL_PASSWORD with your password
 
 The password is deployed with each Pod, and is used by management scripts and commands for MySQL InnoDB Cluster and ClusterSet deployment in this tutorial.
 
@@ -119,9 +119,9 @@ secret/oracle-registry-secret created
 
 You can also create a secret based on existing credentials. See [Create a Secret based on existing credentials](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials.)
 
-✅ **Step4:** Deployment of 3 MySQL instances
+✅ **Step4:** Deployment of three MySQL instances
 
-We will now deploy our 3 MySQL instances using a Kubernetes StatefulSet deployment.  
+We will now deploy our three MySQL instances using a Kubernetes StatefulSet deployment.  
 Why a StatefulSet? Because a StatefulSet is well-suited for a MySQL cluster due to its ability to manage state, ensure stable identities, and orchestrate the deployment of pods in a controlled and persistent manner.
 
 We will apply this manifest (mysql-instance.yaml):
@@ -559,12 +559,12 @@ When you start a MySQL Router, it is bootstrapped against the MySQL InnoDB Clust
 
 Go to [Deployment router service](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/routers)
 
-<a name="step8">✅ **Step 8:**</a> Deployment of an application 
+<a name="step8" style="text-decoration: none;color: black;">✅ **Step 8:**</a> Deployment of an application 
 
 
 This application creates a **mydb** database with a user **app** and deploys an application pod called **ecommerce-platform.**
 
-[Deployment application]([Deployment of a simple e-commerce application](:/12e86c88e357478dafb7d9f2e7b9938a))
+Go to [Deployment application](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/apps)
 
 Connect to one of the secondary servers to check if the mydb database has been properly replicated.
 We will connect using the external address of the Router on the read-only port (6447)

@@ -6,6 +6,8 @@ We will configure and customize the deployment of this application to integrate 
 
 This document will guide you through the deployment process, the necessary configurations, and all the steps to ensure optimal functioning of the application.
 
+![app.png](../imgs/app.png)
+
 ## Prerequisites
 
 Before deploying **ecommerce-platform**, ensure that you have the following prerequisites:
@@ -66,9 +68,9 @@ This sql script creates an app user with a password , modify this script to chan
 
 We previously created a Docker image of this application, making some modifications to the code to enable it to connect to our MySQL InnoDB cluster on different ports.
 
-We will now see how to deploy it in our Kubernetes cluster.
+We will now see how to deploy it in our Kubernetes cluster:
 
-[Next](../../undefined)
+[Next]((https://github.com/colussim/MySQL-Innodb-K8s/#step8))
 
 
 * * *
