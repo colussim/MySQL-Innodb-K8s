@@ -559,7 +559,7 @@ When you start a MySQL Router, it is bootstrapped against the MySQL InnoDB Clust
 
 Go to [Deployment router service](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/routers)
 
-<a href="#step8">✅ **Step 8:**</a> Deployment of an application 
+<a name="step8">✅ **Step 8:**</a> Deployment of an application 
 
 
 This application creates a **mydb** database with a user **app** and deploys an application pod called **ecommerce-platform.**

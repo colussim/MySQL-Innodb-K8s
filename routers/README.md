@@ -270,7 +270,7 @@ We have our 3 Router instances running successfully.
 
 The next step is the deployment of an application.
 
-Go to [Deployment an application](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/#step8)
+Go to [Deployment an application](https://github.com/colussim/MySQL-Innodb-K8s/#step8)
 
 ## Conclusion
 
