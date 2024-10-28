@@ -1,20 +1,18 @@
 ##   Implementing MySQL InnoDB Cluster Router in a Kubernetes Environment
 
-
-![mysql-router-k8s.drawio.png](../imgs/mysql-router-k8s.drawio.png)
-
-
 Setting up a MySQL InnoDB Cluster within a Kubernetes environment involves strategic planning and proper placement of various components to ensure high availability and resilience. One of the critical components in this architecture is the MySQL Router. This article provides insights and recommendations on where and how to deploy the MySQL Router in a Kubernetes environment.
 
-**Understanding MySQL InnoDB Cluster**
+**❇️ Understanding MySQL InnoDB Cluster**
 
 MySQL InnoDB Cluster is a distributed database solution that provides high availability and scalability through a native MySQL replication technology called Group Replication. The cluster is composed of MySQL server instances (nodes) and is managed via the MySQL Shell. In such setups, the MySQL Router acts as a middle layer that directs client traffic to the appropriate MySQL server instances.
 
-**Role of MySQL Router**
+![mysql-router-k8s.drawio.png](../imgs/mysql-router-k8s.drawio.png)
+
+**❇️ Role of MySQL Router**
 
 MySQL Router is a middleware that provides transparent routing between your application and any MySQL server. It can be used for a wide range of use cases, such as high availability and scalability, by efficiently routing database traffic to the appropriate MySQL servers.
 
-**Example: Deploying MySQL Router Only in Kubernetes**
+**❇️ Example: Deploying MySQL Router Only in Kubernetes**
 
 In this example, we will see how to deploy our router using the deployment method with Kubernetes manifests. We will also explore how to achieve this using a Kubernetes operator or tools like ArgoCD or Terraform in future discussions.
 
@@ -271,6 +269,8 @@ We have our 3 Router instances running successfully.
 ## Next Step
 
 The next step is the deployment of an application.
+
+Go to [Deployment an application](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/#step8)
 
 ## Conclusion
 
