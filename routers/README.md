@@ -32,7 +32,8 @@ In our configuration, we have a single application, and we will deploy it in the
 Before deploying MySQL Router, ensure that you have the following prerequisites:
 - A Kubernetes cluster set up and running with loadbalancer service
 - Three MySQL instances installed and configured as a part of a MySQL InnoDB Cluster.
-- MySQL Shell installed
+- MySQL Shell installed.
+- Installed kubectl command-line tool. 
 
 ## Steps
 

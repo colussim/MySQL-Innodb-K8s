@@ -561,7 +561,7 @@ When you start a MySQL Router, it is bootstrapped against the MySQL InnoDB Clust
 
 Go to [Deployment router service](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/routers)
 
-<a name="step8" style="text-decoration: none;color: black;">✅ **Step 8:**</a> Deployment of an application 
+<a name="step8" style="text-decoration: none">✅ **Step 8:**</a> Deployment of an application 
 
 
 This application creates a **mydb** database with a user **app** and deploys an application pod called **ecommerce-platform.**
@@ -745,7 +745,7 @@ http://10.89.0.103:5001
 
 The next step involves testing our application’s behavior during a failover of our MySQL InnoDB cluster,a topic we will address in a future article.
 
-You will find all scripts and manifests in the scripts directory of the repository.
+You will find all scripts and manifests in the [scripts directory](https://github.com/colussim/MySQL-Innodb-K8s/tree/main/scripts)  of the repository.
 
 ## Conclusion
 In conclusion, we have outlined the essential steps for deploying a MySQL InnoDB cluster in Kubernetes using the Kubernetes manifest method, and we have also demonstrated how to deploy an application that utilizes MySQL. This approach allows you to harness the power and flexibility of MySQL, ensuring a resilient and scalable database solution for your applications. As we continue to explore various deployment strategies in future articles, including the MySQL operator and tools such as ArgoCD, we aim to provide a comprehensive understanding of how to optimize MySQL for diverse environments. Thank you for following along, and we look forward to diving deeper into these topics in upcoming discussions.

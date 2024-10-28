@@ -13,7 +13,6 @@ This document will guide you through the deployment process, the necessary confi
 Before deploying **ecommerce-platform**, ensure that you have the following prerequisites:
 - A Kubernetes cluster set up and running with loadbalancer service
 - A MySQL Innodb cluster installed and configured in kubernetes cluster
-- kubectl tool  installed
 - MySQL client
 
 ## Steps
