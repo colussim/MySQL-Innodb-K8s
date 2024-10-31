@@ -38,7 +38,7 @@ namespace/mysqldb created
 
 ```bash
 
-:> kubectl -n mysql1 create secret generic mysql-secret \
+:> kubectl -n mysqldb create secret generic mysql-secret \
   --from-literal=MYSQL_PASSWORD=YourMySQLUserPassword
 secret/mysql-secret created
 :>
