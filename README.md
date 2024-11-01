@@ -22,6 +22,7 @@ Before you get started, you’ll need to have these things:
 - Installed kubectl command-line tool.
 - A Oracle container registry account.
 - bash version 4+
+- mysqlshell or mysql client installed
 
 
 ## Steps
