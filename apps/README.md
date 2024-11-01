@@ -69,7 +69,7 @@ We previously created a Docker image of this application, making some modificati
 
 We will now see how to deploy it in our Kubernetes cluster:
 
-[Next]((https://github.com/colussim/MySQL-Innodb-K8s/#step8))
+[Next](https://github.com/colussim/MySQL-Innodb-K8s/#step8)
 
 
 * * *
@@ -77,3 +77,5 @@ We will now see how to deploy it in our Kubernetes cluster:
 ## References
 
  [ecommerce-platform](https://github.com/just-a-rookie-2001/ecommerce-platform)
+
+
